@@ -3,7 +3,7 @@ GIT
   revision: 24d614f852df054ebeb0d700c361f0d26a1bf8d2
   branch: master
   specs:
-    conjur-demo-sinatra (1.0.1)
+    conjur-demo-sinatra (1.0.0)
       conjur-cli
       cucumber
       cucumber-sinatra
