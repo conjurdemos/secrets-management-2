@@ -5,7 +5,6 @@ config[:stack] = Conjur.stack
 config[:account] = Conjur.account
 keys = config[:api_keys]  = {}
 
-# This model separates duties between 
 namespace do
   config[:namespace] = namespace
   
