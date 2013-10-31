@@ -1,4 +1,5 @@
 config.yml
+conjur.json
 .rvmrc
 *.gem
 *.rbc

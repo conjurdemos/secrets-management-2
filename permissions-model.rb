@@ -1,4 +1,3 @@
-# This model separates duties between 
 namespace do
   group "admin" do
     owns do
