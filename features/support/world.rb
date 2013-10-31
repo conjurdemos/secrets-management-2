@@ -15,7 +15,7 @@ module SecretsManagementWorld
   end
   
   def environment_id
-    CGI.escape [ $config[:namespace], 'secrets' ].join('/')
+    CGI.escape [ Conjur::Config[:namespace], 'secrets' ].join('/')
   end
   
   def environment_path
@@ -42,9 +42,9 @@ module SecretsManagementWorld
     key = api_key(login)
     
     login = if login =~ /host\/(.*)/
-      [ 'host', $config[:namespace], $1 ].join('/')
+      [ 'host', Conjur::Config[:namespace], $1 ].join('/')
     else
-      [ $config[:namespace], login ].join('-')
+      [ Conjur::Config[:namespace], login ].join('-')
     end
     
     api = Conjur::API.new_from_key(login, key)
@@ -53,8 +53,15 @@ module SecretsManagementWorld
   end
   
   def api_key(login)
-    config_key = login.gsub('/', '_').to_sym
-    $config[:api_keys][config_key] or raise "No API key for #{login}"
+#    config_key = login.gsub('/', '_').to_sym
+#    Conjur::Config[:api_keys][config_key] or raise "No API key for #{login}"
+    key = if ( tokens = login.split('/') ).length > 1
+      [ Conjur::Config[:account], tokens[0], [ Conjur::Config[:namespace], tokens[1..-1] ].join('/') ].join(':')
+    else
+      [ Conjur::Config[:account], 'user', [ Conjur::Config[:namespace], login ].join('-') ].join(':')
+    end
+    
+    Conjur::Config[:api_keys][key] or raise "User #{key} not found in #{Conjur::Config[:api_keys].keys}"
   end
 end
 

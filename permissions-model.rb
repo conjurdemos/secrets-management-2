@@ -1,21 +1,11 @@
-require 'conjur/env'
-config = {}
-config[:env] = Conjur.env
-config[:stack] = Conjur.stack
-config[:account] = Conjur.account
-keys = config[:api_keys]  = {}
-
 # This model separates duties between 
 namespace do
-  config[:namespace] = namespace
-  
   group "admin" do
     owns do
       # This is a service layer which performs provisioning operations
       provision_service = layer "provision" do |layer|
         # Create a host and add it to the layer
         host("a") do |a|
-          keys[:host_a] = a.api_key
           layer.add_host a.roleid
         end
       end
@@ -26,7 +16,6 @@ namespace do
 
         # Create a user and grant him this role
         user("#{namespace}-bob") do |u|
-          keys[:bob] = u.api_key
           role.grant_to u.roleid
         end
       end
@@ -35,7 +24,6 @@ namespace do
       role "ops", "admin" do |role|
         # Create a user and grant her this role
         user("#{namespace}-alice") do |u|
-          keys[:alice] = u.api_key
           role.grant_to u.roleid
         end
         
@@ -64,5 +52,3 @@ namespace do
     end
   end
 end
-
-config.to_yaml

@@ -29,7 +29,7 @@ end
 
 When(/^I check my permission to "(.*?)" the "(.*?)" resource named "(.*?)"$/) do |privilege, resource_kind, resource_id|
   @response = begin
-    rest_resource(:authz)[$config[:account]]['resources'][resource_kind][$config[:namespace]][resource_id]["?check&privilege=#{privilege}"].get
+    rest_resource(:authz)[Conjur::Config[:account]]['resources'][resource_kind][Conjur::Config[:namespace]][resource_id]["?check&privilege=#{privilege}"].get
   rescue RestClient::Exception
     handle_rest_exception true, $!
   end

@@ -1,0 +1,11 @@
+{
+  "env": "production",
+  "stack": "ci",
+  "account": "ci",
+  "api_keys": {
+    "ci:host:fzcwm0/a": "3ts9rg61drt1ef178jhk4561s5ay3b8fj3e82jhj322w2r274x0x0",
+    "ci:user:fzcwm0-bob": "13jzc305sjb4k28v980236h10ev13hw6p53kwm65033xh8nn3ke5mmb",
+    "ci:user:fzcwm0-alice": "26pgn361d9svx63tme74rkkz0733ddj9wd1htz1eq3km152v2av7gz9"
+  },
+  "namespace": "fzcwm0"
+}
