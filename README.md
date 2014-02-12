@@ -1,7 +1,7 @@
 Secrets Management
 ==================
 
-A live demonstration of http://developer.conjur.net/use-cases/secrets-management.html
+A live demonstration of http://developer.conjur.net/patterns/secrets-management.html
 
 Usage
 -----
